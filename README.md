@@ -30,7 +30,7 @@ GET /students
 ### Get student by id
 GET /students/{id}
 
-## 📸 ![GET All Students] (screenshots/get-students.png)
+## 📸 ![GET All Students](screenshots/get-students.png)
 
 ### ✅ GET All Students — 200 OK
 
@@ -43,14 +43,14 @@ Example JSON:
 "email": "kiruthika@gmail.com",
 "course": "BCA"
 }
-## 📸 (screenshots/POST-students.png)
+## 📸 ![POST Add Student](screenshots/POST-students.png)
 
 ### Update student
 PUT /students/{id}
 
 ### Delete student
 DELETE /students/{id}
-## 📸 (screenshots/DELETE-students.png)
+## 📸 ![DELETE Student](screenshots/DELETE-students.png)
 
 ## 🗄 Database
 PostgreSQL cloud database hosted on Render.
