@@ -30,11 +30,9 @@ GET /students
 ### Get student by id
 GET /students/{id}
 
-## 📸 API in Action
+## 📸 ![GET All Students] (screenshots/get-students.png)
 
 ### ✅ GET All Students — 200 OK
-
-![GET All Students] (screenshots/get-students.png)
 
 ### Add student
 POST /students
