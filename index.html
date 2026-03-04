@@ -297,18 +297,42 @@
 
   <script>
     const API = 'https://student-management-system-rv47.onrender.com/students';
+    let retryCount = 0;
+    const maxRetries = 10;
+    let countdown = 30;
+    let countdownTimer = null;
 
     function getInitial(name) {
       return name ? name.charAt(0).toUpperCase() : '?';
+    }
+
+    function showWakingUp() {
+      countdown = 30;
+      document.getElementById('students-grid').innerHTML = `
+        <div class="loading" id="wakeup-msg">
+          <div class="spinner"></div>
+          <div style="color:#f59e0b; font-size:1rem; margin-bottom:8px">⏳ API is waking up...</div>
+          <div style="color:#64748b; font-size:0.85rem">Render free tier sleeps after inactivity</div>
+          <div style="color:#3b82f6; font-size:1rem; margin-top:12px" id="retry-countdown">Auto-retrying in 30 seconds...</div>
+          <div style="color:#475569; font-size:0.8rem; margin-top:6px">Attempt ${retryCount} of ${maxRetries}</div>
+        </div>`;
+
+      clearInterval(countdownTimer);
+      countdownTimer = setInterval(() => {
+        countdown--;
+        const el = document.getElementById('retry-countdown');
+        if (el) el.textContent = `Auto-retrying in ${countdown} seconds...`;
+        if (countdown <= 0) clearInterval(countdownTimer);
+      }, 1000);
     }
 
     async function loadStudents() {
       try {
         const res = await fetch(API);
         const students = await res.json();
+        clearInterval(countdownTimer);
 
         document.getElementById('total-count').textContent = students.length;
-
         const grid = document.getElementById('students-grid');
 
         if (students.length === 0) {
@@ -327,12 +351,19 @@
         `).join('');
 
       } catch (err) {
-        document.getElementById('students-grid').innerHTML = `
-          <div class="loading">
-            ⚠️ API is waking up (Render free tier sleeps after inactivity).<br>
-            <small style="color:#475569">Please refresh in 30 seconds...</small>
-          </div>`;
+        retryCount++;
         document.getElementById('total-count').textContent = '...';
+
+        if (retryCount <= maxRetries) {
+          showWakingUp();
+          setTimeout(loadStudents, 30000);
+        } else {
+          document.getElementById('students-grid').innerHTML = `
+            <div class="loading">
+              ❌ Could not connect to API after ${maxRetries} attempts.<br>
+              <small style="color:#475569">Try refreshing the page manually.</small>
+            </div>`;
+        }
       }
     }
 
