@@ -3,7 +3,7 @@
 A backend RESTful API built using Spring Boot to manage student records with full CRUD operations. The application is deployed on Render and connected to a cloud PostgreSQL database.
 
 ## 🚀 Live API
-[Live API](https://student-management-system-rv47.onrender.com/students)
+[Live API](https://kiruthika-s-dev.github.io/student-management-system/)
 
 ## 🛠 Tech Stack
 - Java 17
