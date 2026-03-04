@@ -34,7 +34,7 @@ GET /students/{id}
 
 ### ✅ GET All Students — 200 OK
 
-![GET All Students] (screenshots/get-students,png)
+![GET All Students] (screenshots/get-students.png)
 
 ### Add student
 POST /students
@@ -45,12 +45,14 @@ Example JSON:
 "email": "kiruthika@gmail.com",
 "course": "BCA"
 }
+## 📸 (screenshots/POST-students.png)
 
 ### Update student
 PUT /students/{id}
 
 ### Delete student
 DELETE /students/{id}
+## 📸 (screenshots/DELETE-students.png)
 
 ## 🗄 Database
 PostgreSQL cloud database hosted on Render.
