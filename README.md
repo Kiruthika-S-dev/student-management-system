@@ -22,6 +22,9 @@ Fully secured with JWT Authentication, Dockerized, and deployed live on Render c
 | [📖 Swagger UI Docs](https://student-management-system-rv47.onrender.com/swagger-ui/index.html) | Interactive API documentation |
 
 > ⏳ **Note:** First load may take 30-60 seconds as Render free tier wakes up. Please refresh once!
+> 🔐 **Authentication Required:** This API is secured with JWT! All /students endpoints require a valid token.
+> 👉 Use Swagger UI to test: https://student-management-system-rv47.onrender.com/swagger-ui/index.html
+> register, login, get token, click Authorize and test! 🔓
 
 ---
 
