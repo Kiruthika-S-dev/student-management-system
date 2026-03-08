@@ -3,6 +3,8 @@ package com.example.student_management.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.student_management.DTO.StudentDTO;
 import com.example.student_management.entity.Student;
 import com.example.student_management.repository.StudentRepository;
 import com.example.student_management.service.StudentService;
@@ -31,16 +34,11 @@ public class StudentController {     // command line full of repository and real
 		return studentService.saveStudent(student);
 	}
 	
-	@GetMapping //get all student GET API
-	public List<Student>getAllStudents(){
-		return studentService.getAllStudents(); //findAll();
-	}
 	
-	@GetMapping("/{id}") //get student by id
+	@GetMapping("/{id}")
 	public Student getStudentById(@PathVariable Long id) {
 		return studentService.getStudentById(id);
 	}
-	
 
 	@PutMapping("/{id}") // PUT API update student by id
 	public Student updateStudent(@Valid @PathVariable Long id, @RequestBody Student student) {
@@ -74,5 +72,17 @@ public class StudentController {     // command line full of repository and real
 	@GetMapping("/search/email")
 	public List<Student>searchByEmail(@RequestParam String email) {
 		return studentService.searchByEmail(email);
+	}
+		
+	// search by course
+	@GetMapping("/search/course")
+	public List<Student>searchByCourse(@RequestParam String course) {
+		return studentService.searchByCourse(course);
+	}
+	
+	//add Page(Pagination)
+	@GetMapping
+	public Page<Student> getStudents(Pageable pageable){
+		return studentService.getStudents(pageable);
 	}
 }
